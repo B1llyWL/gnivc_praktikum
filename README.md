@@ -40,7 +40,12 @@ The pipeline calculates sliding aggregates within specified time windows (e.g., 
 
 ## ⚡️ Quick Start
 
-### 1. Start Infrastructure
+### 0. Clone the repository 
+```bash
+git clone https://github.com/B1llyWL/gnivc_praktikum.git
+cd gnivc_praktikum
+```
+### 1. Start Infrastructure (1 Terminal)
 Ensure Docker is running, then execute:
 ```bash
 docker compose up -d
@@ -62,11 +67,18 @@ CREATE TABLE IF NOT EXISTS basic_metrics (
 source venv/bin/activate
 jupyter notebook
 ```
-### 4. Test the Pipeline
+
+### 4. Test the Pipeline (2 Terminal)
 ```bash
 docker exec -it kafka kafka-console-producer --broker-list localhost:9092 --topic receipts-topic
 ```
-### 5. Verify Results
+
+### 5. EXAMPLE
+```bash
+{"Id": 525242,"User": 2017,"OrganizationId": 104,"Organization":"ООО \"Уильям и Кейт\"","LegalForm":"ООО","InvoiceId": 88301,"InvoiceType": 2,"InvoiceSum": 2450.00,"PaymentType":"CARD","CheckSum": 999.00,"CreatedAt":"2025-08-06T21:00:00+03:00","Items":[{"ItemId": 1,"Name":"Пиво London Pride стаут 0.5л","Price": 420.00,"Quantity": 2.000,"Sum": 840.00,"ProductType":"ALCOHOL"},{"ItemId": 2,"Name":"Традиционный Фиш-энд-Чипс 350г","Price": 290.00,"Quantity": 1.000,"Sum": 290.00,"ProductType":"FOOD"}]}
+```
+
+### 6. Verify Results
 ```bash
 docker exec -it postgres psql -U postgres -d gnivc -c "SELECT * FROM basic_metrics;"
 ```
